@@ -1,0 +1,6 @@
+# Ignore temporary and sensitive files
+*.swp
+*.bak
+*.cache
+*.log
+.DS_Store

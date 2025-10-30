@@ -1,0 +1,142 @@
+vim.g.mapleader = " "
+-- I like to have my tabs 4 spaces and not 2!!
+vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.keymap.set("n", "<leader>f", vim.cmd.Ex, { desc = "Open Netrw" })
+vim.keymap.set("n", "<C-q>", vim.cmd.q)
+vim.keymap.set("v", "<leader>pb", function ()
+    vim.lsp.buf.format({
+        async = false,
+        range = {
+            ["start"] = { vim.fn.line("'<") - 1, 0 },
+            ["end"] = { vim.fn.line("'>"), 0 }
+        }
+    }) -- format first
+end, { desc = "Format selected lines with Black" })
+vim.keymap.set("n", "<leader>pB", function()
+    vim.lsp.buf.format({ async = false })
+end, { desc = "Format entire buffer with Black" })
+
+-- BarBar
+
+--local map = vim.api.nvim_set_keymap
+--local opts = { noremap = true, silent = true }
+
+-- -- Move to previous/next
+-- vim.keymap.set('n', '<C-t>', function() vim.cmd("tabnew") end)
+-- map('n', '<S-h>', '<Cmd>BufferPrevious<CR>', opts)
+-- map('n', '<S-l>', '<Cmd>BufferNext<CR>', opts)
+-- 
+-- -- Goto buffer in position...
+-- map('n', '<C-1>', '<Cmd>BufferGoto 1<CR>', opts)
+-- map('n', '<C-2>', '<Cmd>BufferGoto 2<CR>', opts)
+-- map('n', '<C-3>', '<Cmd>BufferGoto 3<CR>', opts)
+-- map('n', '<C-4>', '<Cmd>BufferGoto 4<CR>', opts)
+-- map('n', '<C-5>', '<Cmd>BufferGoto 5<CR>', opts)
+-- map('n', '<C-6>', '<Cmd>BufferGoto 6<CR>', opts)
+-- map('n', '<C-7>', '<Cmd>BufferGoto 7<CR>', opts)
+-- map('n', '<C-8>', '<Cmd>BufferGoto 8<CR>', opts)
+-- map('n', '<C-9>', '<Cmd>BufferGoto 9<CR>', opts)
+-- map('n', '<C-0>', '<Cmd>BufferLast<CR>', opts)
+-- 
+-- -- Pin/unpin buffer
+-- map('n', '<C-p>', '<Cmd>BufferPin<CR>', opts)
+-- 
+-- -- Goto pinned/unpinned buffer
+-- --                 :BufferGotoPinned
+-- --                 :BufferGotoUnpinned
+-- 
+-- -- Close buffer
+-- map('n', '<C-c>', '<Cmd>BufferClose<CR>', opts)
+-- 
+-- -- Wipeout buffer
+-- --                 :BufferWipeout
+-- 
+-- 
+-- -- Close commands
+-- 
+-- --                 :BufferCloseAllButCurrent
+-- --                 :BufferCloseAllButPinned
+-- --                 :BufferCloseAllButCurrentOrPinned
+-- 
+-- --                 :BufferCloseBuffersLeft
+-- --                 :BufferCloseBuffersRight
+-- 
+-- -- Magic buffer-picking mode
+-- -- Sort automatically by...
+-- map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+-- map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>', opts)
+-- map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+-- map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+-- map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+-- 
+-- Transparent.nvim
+
+vim.keymap.set('n', '<leader>g', function() vim.cmd(":TransparentToggle") end, { desc = 'Transparent Toggle' })
+
+-- Toggle colorschemes
+vim.keymap.set("n", "<leader>tc", ToggleColorscheme, { desc = "Toggle colorscheme" })
+
+-- Harpoon
+
+vim.keymap.set('n', '<leader>ha', function() vim.cmd.lua("require('harpoon.mark').add_file()") end, { desc = 'Harpoon Add' })
+vim.keymap.set('n', '<leader>hh', function() vim.cmd.lua("require('harpoon.ui').toggle_quick_menu()") end, { desc = 'Harpoon See' })
+
+-- Telescope
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>tf', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>tg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>tb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>th', builtin.help_tags, { desc = 'Telescope help tags' })
+
+-- vim tmux navigator
+vim.g.tmux_navigator_no_mappings = 1 
+vim.keymap.set('n', '<C-h>', ':TmuxNavigateLeft<CR>', { silent = true })
+vim.keymap.set('n', '<C-j>', ':TmuxNavigateDown<CR>', { silent = true })
+vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>', { silent = true })
+
+-- snacks
+
+local Snacks = require("snacks")  -- just require it, no setup call
+
+vim.keymap.set("n", "<leader>fo", function()
+    Snacks.picker.recent({ layout = "telescope" })
+end, { desc = "Find Old Files [ Snacks ]" })
+
+vim.keymap.set("n", "<leader>fg", function()
+    Snacks.picker.git_files({ layout = "telescope" })
+end, { desc = "Find Git Files [ Snacks ]" })
+
+vim.keymap.set("n", "<leader>fl", function()
+    Snacks.picker.grep({ layout = "telescope" })
+end, { desc = "Live Grep [ Snacks ]" })
+
+vim.keymap.set("n", "<leader>fC", function()
+    Snacks.picker.files({
+        cwd = vim.fn.expand("$HOME/.config/"),
+        layout = "telescope",
+    })
+end, { desc = "Find Config Files [ Snacks ]" })
+
+vim.keymap.set("n", "<leader>gO", function()
+    Snacks.gitbrowse()
+end, { desc = "Git Browse - Open Browser [ Snacks ]" })
+
+
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- Bufferline keymaps
+map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", opts)
+map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", opts)
+map("n", "<C-c>", "<cmd>BufferLineClose<CR>", opts)
+
+-- Dropbar keymaps
+local dropbar_api = require("dropbar.api")
+map("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+map("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+map("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })

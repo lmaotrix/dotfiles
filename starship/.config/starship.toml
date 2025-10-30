@@ -1,0 +1,152 @@
+
+# == Theme ==
+palette = 'deepspace'
+
+# == Defini Prompt Style ==
+format="""
+$username\
+$directory\
+$git_branch\
+$git_status\
+$c\
+$python\
+$lua\
+$nodejs\
+$direnv\
+$fill\
+$jobs $cmd_duration\
+$line_break\
+$character
+"""
+
+# -- Configure Directory Module --
+[directory]
+format = "[\\[[$path](dark_blue bold)\\]](dark_red)"
+truncation_length = 0
+truncate_to_repo = false
+
+
+
+# -- Configure Git Branch Module --
+[git_branch]
+symbol = ''
+format = "[\\[[$symbol](dark_green) [$branch](dark_white bold)\\]](dark_red)"
+
+
+# -- Configure Git Status Module --
+[git_status]
+
+format = "[\\[[$ahead_behind](green)[$modified](dark_yellow)[$conflicted](red)[$renamed](dark_white)[$staged](dark_gray)[$untracked](gray)[$deleted](dark_red)\\]](dark_white)"
+conflicted = ''
+ahead = ''
+behind = ''
+diverged = ''
+# INFO: also known as 'ahead_behind'??!??
+up_to_date = ''
+untracked = ''
+stashed = '󰠔'
+modified = ''
+staged = '󰓍'
+renamed = ''
+deleted = ''
+
+
+
+# -- Configure C Language Module --
+
+[c]
+format = "[\\[[$symbol](#5C6BC0 bold) [$name](white) [$version](white)\\]](dark_red)"
+
+symbol = 'C'
+
+version_format = 'v${major}'
+
+
+
+# -- Configure Python Language Module --
+
+[python]
+format = "[\\[[$symbol](#FFC107 bold) [$name](white) [$virtualenv](#0277BD) [$version](white)\\]](dark_red)"
+symbol = '󰌠'
+version_format = 'v${major}'
+
+
+# -- Configure Lua Language Module --
+[lua]
+format = "[\\[[$symbol](#00007D bold) [$version](white)\\]](dark_red)"
+symbol = '󰢱'
+
+version_format = 'v${major}'
+
+
+
+# -- Configure Javascript / Node Language Module --
+[nodejs]
+
+format = "[\\[[$symbol](#4CAF50 bold)[$version](white)\\]](dark_red)"
+version_format = 'v${major}'
+
+
+
+# -- Configure "Spacer" Module --
+[fill]
+symbol=' '
+
+
+
+# -- Configure Background Running Tasks Module --
+
+[jobs]
+
+format = "[$symbol](s_bg bold) [$number](white)"
+symbol = '󰠔'
+number_threshold = 1
+
+
+
+# -- Configure Time Taken for Tasks Module --
+
+[cmd_duration]
+format = "[$duration](yellow)"
+
+min_time = 1_500
+show_milliseconds = true
+
+
+
+# -- Configure "Prompt Character" Module --
+[character]
+success_symbol = "[󰘧](dark_green)"
+error_symbol = "[󰘧](dark_red)"
+
+
+# == Colour Palette ==
+
+[palettes.deepspace]
+
+bg = '#0D0E11'
+fg = '#DEE4DF'
+s_bg = '#919191'
+
+s_fg = '#000000'
+cursor = '#797F87'
+dark_gray = '#43494D'
+gray = '#5C656A'
+dark_red = '#E62D2D'
+
+red = '#FD2121'
+dark_green = '#7C9F34'
+green = '#80B918'
+
+dark_yellow = '#E8AA32'
+
+yellow = '#FFCE1F'
+dark_blue = '#3D8CC4'
+
+blue = '#2B87FF'
+dark_purple = '#A765CC'
+purple = '#A14FE9'
+dark_cyan = '#21798A'
+cyan = '#2DA2BA'
+dark_white = '#AAAAAA'
+white = '#CCCCCC'
