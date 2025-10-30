@@ -3,7 +3,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # install dependencies
 echo "Installing dependencies..."
-sudo pacman -S --needed zsh neovim starship tmux stow
+sudo pacman -S --needed zsh neovim starship tmux stow fzf
 
 # use stow to symlink dotfiles
 cd "$DOTFILES_DIR" || exit
